@@ -3,7 +3,7 @@ let users = {
         id: 'sarahedo',
         password: 'password123',
         name: 'Sarah Edo',
-        avatarURL: '../icons/person_male01.png',
+        avatarURL: 'https://cdn-icons-png.flaticon.com/128/2059/2059570.png',
         answers: {
             "8xf0y6ziyjabvozdd253nd": 'optionOne',
             "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -16,7 +16,7 @@ let users = {
         id: 'tylermcginnis',
         password: 'abc321',
         name: 'Tyler McGinnis',
-        avatarURL: '../icons/person_female01.png',
+        avatarURL: 'https://cdn-icons-png.flaticon.com/128/706/706831.png',
         answers: {
             "vthrdm985a262al8qx3do": 'optionOne',
             "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -27,7 +27,7 @@ let users = {
         id: 'mtsamis',
         password: 'xyz123',
         name: 'Mike Tsamis',
-        avatarURL: '../icons/person_female02.png',
+        avatarURL: 'https://cdn-icons-png.flaticon.com/128/706/706819.png',
         answers: {
             "xj352vofupe1dqz9emx13r": 'optionOne',
             "vthrdm985a262al8qx3do": 'optionTwo',
@@ -39,7 +39,7 @@ let users = {
         id: 'zoshikanlu',
         password: 'pass246',
         name: 'Zenobia Oshikanlu',
-        avatarURL: '../icons/person_male02.png',
+        avatarURL: 'https://cdn-icons-png.flaticon.com/128/2202/2202090.png',
         answers: {
             "xj352vofupe1dqz9emx13r": 'optionOne',
         },
