@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { handleLogin } from "../actions/authedUser";
+import { Navigate } from "react-router-dom";
 
-const Login = ({ dispatch }) => {
+const Login = ({ dispatch, authedUser }) => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+
+    if (authedUser !== null) {
+        const redirectUrl = new URLSearchParams(window.location.search).get('redirectTo') || "/";
+        return <Navigate to={redirectUrl} />;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,6 +52,6 @@ const Login = ({ dispatch }) => {
     )
 }
 
-const mapStateToProps = ({ users }) => ({ users });
+const mapStateToProps = ({ authedUser }) => ({ authedUser });
 
 export default connect(mapStateToProps)(Login);

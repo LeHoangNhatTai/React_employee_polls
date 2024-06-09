@@ -3,16 +3,13 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { legacy_createStore as createStore } from 'redux';
-import reducer from "../reducers";
-import middleware from "../middleware";
+import { store } from "../store";
 import { handleInitialData } from "../actions/shared";
 import { setAuthedUser } from '../actions/authedUser';
 import NewPoll from "./NewPoll";
 
 describe("NewPoll", () => {
     it("renders the component", () => {
-        const store = createStore(reducer,middleware);
         store.dispatch(handleInitialData());
         const component = render(
             <Provider store={store}>
@@ -26,7 +23,6 @@ describe("NewPoll", () => {
     });
 
     it("handle input changes correctly", () => {
-        const store = createStore(reducer,middleware);
         store.dispatch(handleInitialData());
         const component = render(
             <Provider store={store}>
@@ -45,7 +41,6 @@ describe("NewPoll", () => {
     });
 
     it("should display Second Option elements", () => {
-        const store = createStore(reducer,middleware);
         store.dispatch(handleInitialData());
         const component = render(
             <Provider store={store}>
@@ -64,7 +59,6 @@ describe("NewPoll", () => {
     });
 
     it("should submit the form correctly", () => {
-        const store = createStore(reducer,middleware);
         store.dispatch(handleInitialData());
         store.dispatch(setAuthedUser("mtsamis"));
         const component = render(

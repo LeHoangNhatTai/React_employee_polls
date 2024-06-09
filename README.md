@@ -4,66 +4,83 @@
 ## Available Scripts
 
 In the project directory, you can run:
+- Run "npm install" to install all packages into node_modules
+- Run "npm start" to run the app in development mode.
+- Run "npm run test" to launch the test runner in interactive watch mode.
 
-### `npm start`
+# Employee Polls Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This is the starter code for the final assessment project for Udacity's React & Redux course.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the `_DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you need to add the path to each user's avatar.
 
-### `npm test`
+Using the provided starter code, you'll build a React/Redux frontend for the application. We recommend using [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Data
 
-### `npm run build`
+There are two types of objects stored in our database:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Users
+* Questions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Users
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Users include:
 
-### `npm run eject`
+| Attribute    | Type             | Description           |
+|--------------|------------------|-----------------------|
+| id           | String           | The user's unique identifier |
+| password     | String           | The user's password used to log in to the application |
+| name         | String           | The user's full name |
+| avatarURL    | String           | The path to the user's avatar image file |
+| questions    | Array            | A list of IDs of the polling questions this user created |
+| answers      | Object           | The object's keys are the IDs of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Questions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Questions include:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Attribute    | Type   | Description                               |
+|--------------|--------|-------------------------------------------|
+| id           | String | The question's unique identifier           |
+| author       | String | The author's unique identifier            |
+| timestamp    | String | The time when the question was created    |
+| optionOne    | Object | The first voting option                   |
+| optionTwo    | Object | The second voting option                  |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Voting Options
 
-## Learn More
+Voting options are attached to questions. They include:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Attribute    | Type   | Description                               |
+|--------------|--------|-------------------------------------------|
+| votes        | Array  | A list that contains the IDs of each user who voted for that option |
+| text         | String | The text of the option                    |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Your code will interact with the database via 4 methods:
 
-### Code Splitting
+* `_getUsers()`
+* `_getQuestions()`
+* `_saveQuestion(question)`
+* `_saveQuestionAnswer(object)`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1) `_getUsers()` Method
 
-### Analyzing the Bundle Size
+- **Description**: Get all existing users from the database.  
+- **Return Value**: Object where the key is the user's ID and the value is the user object.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2) `_getQuestions()` Method
 
-### Making a Progressive Web App
+- **Description**: Get all existing questions from the database.  
+- **Return Value**: Object where the key is the question's ID and the value is the question object.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3) `_saveQuestion(question)` Method
 
-### Advanced Configuration
+- **Description**: Save the polling question in the database. If one of the parameters is missing, an error is thrown.
+- **Parameters**: Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`.
+- **Return Value**: An object that has the following properties: `id`, `author`, `optionOne`, `optionTwo`, `timestamp`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4) `_saveQuestionAnswer(object)` Method
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Description**: Save the answer to a particular polling question in the database. If one of the parameters is missing, an error is thrown.
+- **Parameters**: Object that contains the following properties: `authedUser`, `qid`, and `answer`.

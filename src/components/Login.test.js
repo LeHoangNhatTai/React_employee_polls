@@ -3,16 +3,12 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { legacy_createStore as createStore } from 'redux';
 import Login from "./Login";
-import reducer from "../reducers";
-import middleware from "../middleware";
 import { handleInitialData } from "../actions/shared";
+import { store } from "../store";
 
 describe("Login", () => {
     it("render the component", () => {
-        const store = createStore(reducer);
-
         const component = render(
             <Provider store={store}>
                 <BrowserRouter>
@@ -26,7 +22,6 @@ describe("Login", () => {
     });
 
     it('show input element', async () => {
-        const store = createStore(reducer);
         const component = render(
             <Provider store={store}>
                 <BrowserRouter>
@@ -42,7 +37,6 @@ describe("Login", () => {
     });
 
     it("valid process submit button", async () => {
-        const store = createStore(reducer,middleware);
         await store.dispatch(handleInitialData());
         const component = render(
             <Provider store={store}>
